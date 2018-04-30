@@ -1,12 +1,12 @@
 # coding: utf-8
 
 import dash
-from dash.dependencies import Input, Output
+# from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
-import os
+# import os
 
 app = dash.Dash(__name__)
 server = app.server
@@ -30,8 +30,10 @@ df_unrealized = pd.read_csv('https://plot.ly/~bdun9/2802.csv')
 df_graph = pd.read_csv("https://plot.ly/~bdun9/2804.csv")
 
 # reusable componenets
+
+
 def make_dash_table(df):
-    ''' Return a dash definitio of an HTML table for a Pandas dataframe '''
+    ''' Return a dash definition of an HTML table for a Pandas dataframe '''
     table = []
     for index, row in df.iterrows():
         html_row = []
@@ -42,15 +44,21 @@ def make_dash_table(df):
 
 
 def print_button():
-    printButton = html.A(['Print PDF'],className="button no-print print",style={'position': "absolute", 'top': '-40', 'right': '0'})
+    printButton = html.A(['Print PDF'],
+                         className="button no-print print",
+                         style={'position': "absolute",
+                                'top': '-40', 'right': '0'})
     return printButton
 
 # includes page/full view
+
+
 def get_logo():
     logo = html.Div([
 
         html.Div([
-            html.Img(src='http://logonoid.com/images/vanguard-logo.png', height='40', width='160')
+            html.Img(src='http://logonoid.com/images/vanguard-logo.png',
+                     height='40', width='160')
         ], className="ten columns padded"),
 
         html.Div([
@@ -76,22 +84,30 @@ def get_header():
 def get_menu():
     menu = html.Div([
 
-        dcc.Link('Overview   ', href='/overview', className="tab first"),
+        dcc.Link('Overview   ', href='/overview',
+                 className="tab first"),
 
-        dcc.Link('Price Performance   ', href='/price-performance', className="tab"),
+        dcc.Link('Price Performance   ',
+                 href='/price-performance', className="tab"),
 
-        dcc.Link('Portfolio & Management   ', href='/portfolio-management', className="tab"),
+        dcc.Link('Portfolio & Management   ',
+                 href='/portfolio-management', className="tab"),
 
-        dcc.Link('Fees & Minimums   ', href='/fees', className="tab"),
+        dcc.Link('Fees & Minimums   ',
+                 href='/fees', className="tab"),
 
-        dcc.Link('Distributions   ', href='/distributions', className="tab"),
+        dcc.Link('Distributions   ',
+                 href='/distributions', className="tab"),
 
-        dcc.Link('News & Reviews   ', href='/news-and-reviews', className="tab")
+        dcc.Link('News & Reviews   ',
+                 href='/news-and-reviews', className="tab")
 
     ], className="row ")
     return menu
 
-## Page layouts
+# Page layouts
+
+
 overview = html.Div([  # page 1
 
         print_button(),
@@ -115,14 +131,17 @@ overview = html.Div([  # page 1
                     html.Br([]),
 
                     html.P("\
-                            As the industry’s first index fund for individual investors, \
-                            the 500 Index Fund is a low-cost way to gain diversified exposure \
-                            to the U.S. equity market. The fund offers exposure to 500 of the \
-                            largest U.S. companies, which span many different industries and \
-                            account for about three-fourths of the U.S. stock market’s value. \
-                            The key risk for the fund is the volatility that comes with its full \
-                            exposure to the stock market. Because the 500 Index Fund is broadly \
-                            diversified within the large-capitalization market, it may be \
+                            As the industry’s first index fund for individual \
+                            investors, the 500 Index Fund is a low-cost way \
+                            to gain diversified exposure to the U.S. equity \
+                            market. The fund offers exposure to 500 of the \
+                            largest U.S. companies, which span many different \
+                            industries and account for about three-fourths of \
+                            the U.S. stock market’s value. \
+                            The key risk for the fund is the volatility that \
+                            comes with its full exposure to the stock market. \
+                            Because the 500 Index Fund is broadly diversified \
+                            within the large-capitalization market, it may be \
                             considered a core equity holding in a portfolio."),
 
                 ], className="six columns"),
@@ -143,68 +162,71 @@ overview = html.Div([  # page 1
                     html.H6('Average annual performance',
                             className="gs-header gs-text-header padded"),
                     dcc.Graph(
-                        id = "graph-1",
+                        id="graph-1",
                         figure={
                             'data': [
                                 go.Bar(
-                                    x = ["1 Year", "3 Year", "5 Year", "10 Year", "41 Year"],
-                                    y = ["21.67", "11.26", "15.62", "8.37", "11.11"],
-                                    marker = {
+                                    x=["1 Year", "3 Year", "5 Year",
+                                       "10 Year", "41 Year"],
+                                    y=["21.67", "11.26", "15.62",
+                                       "8.37", "11.11"],
+                                    marker={
                                       "color": "rgb(53, 83, 255)",
                                       "line": {
                                         "color": "rgb(255, 255, 255)",
                                         "width": 2
                                       }
                                     },
-                                    name = "500 Index Fund",
-                                    type = "bar"
+                                    name="500 Index Fund",
+                                    type="bar"
                                 ),
                                 go.Bar(
-                                    x = ["1 Year", "3 Year", "5 Year", "10 Year", "41 Year"],
-                                    y = ["21.83", "11.41", "15.79", "8.50"],
-                                    marker = {
+                                    x=["1 Year", "3 Year", "5 Year",
+                                       "10 Year", "41 Year"],
+                                    y=["21.83", "11.41", "15.79", "8.50"],
+                                    marker={
                                       "color": "rgb(255, 225, 53)",
                                       "line": {
                                         "color": "rgb(255, 255, 255)",
                                         "width": 2
                                         }
                                     },
-                                    name = "S&P 500 Index",
-                                    type = "bar"
+                                    name="S&P 500 Index",
+                                    type="bar"
                                 ),
                             ],
                             'layout': go.Layout(
-                                autosize = False,
-                                bargap = 0.35,
-                                font = {
+                                autosize=False,
+                                bargap=0.35,
+                                font={
                                   "family": "Raleway",
                                   "size": 10
                                 },
-                                height = 200,
-                                hovermode = "closest",
-                                legend = {
+                                height=200,
+                                hovermode="closest",
+                                legend={
                                   "x": -0.0228945952895,
                                   "y": -0.189563896463,
                                   "orientation": "h",
                                   "yanchor": "top"
                                 },
-                                margin = {
+                                margin={
                                   "r": 0,
                                   "t": 20,
                                   "b": 10,
                                   "l": 10
                                 },
-                                showlegend = True,
-                                title = "",
-                                width = 340,
-                                xaxis = {
+                                showlegend=True,
+                                title="",
+                                width=340,
+                                xaxis={
                                   "autorange": True,
                                   "range": [-0.5, 4.5],
                                   "showline": True,
                                   "title": "",
                                   "type": "category"
                                 },
-                                yaxis = {
+                                yaxis={
                                   "autorange": True,
                                   "range": [0, 22.9789473684],
                                   "showgrid": True,
@@ -229,36 +251,40 @@ overview = html.Div([  # page 1
                         figure={
                             'data': [
                                 go.Scatter(
-                                    x = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"],
-                                    y = ["10000", "7500", "9000", "10000", "10500", "11000", "14000", "18000", "19000", "20500", "24000"],
-                                    line = {"color": "rgb(53, 83, 255)"},
-                                    mode = "lines",
-                                    name = "500 Index Fund Inv"
+                                    x=["2008", "2009", "2010", "2011",
+                                       "2012", "2013", "2014", "2015",
+                                       "2016", "2017", "2018"],
+                                    y=["10000", "7500", "9000", "10000",
+                                       "10500", "11000", "14000", "18000",
+                                       "19000", "20500", "24000"],
+                                    line={"color": "rgb(53, 83, 255)"},
+                                    mode="lines",
+                                    name="500 Index Fund Inv"
                                 )
                             ],
                             'layout': go.Layout(
-                                autosize = False,
-                                title = "",
-                                font = {
+                                autosize=False,
+                                title="",
+                                font={
                                   "family": "Raleway",
                                   "size": 10
                                 },
-                                height = 200,
-                                width = 340,
-                                hovermode = "closest",
-                                legend = {
+                                height=200,
+                                width=340,
+                                hovermode="closest",
+                                legend={
                                   "x": -0.0277108433735,
                                   "y": -0.142606516291,
                                   "orientation": "h"
                                 },
-                                margin = {
+                                margin={
                                   "r": 20,
                                   "t": 20,
                                   "b": 20,
                                   "l": 50
                                 },
-                                showlegend = True,
-                                xaxis = {
+                                showlegend=True,
+                                xaxis={
                                   "autorange": True,
                                   "linecolor": "rgb(0, 0, 0)",
                                   "linewidth": 1,
@@ -268,7 +294,7 @@ overview = html.Div([  # page 1
                                   "title": "",
                                   "type": "linear"
                                 },
-                                yaxis = {
+                                yaxis={
                                   "autorange": False,
                                   "gridcolor": "rgba(127, 127, 127, 0.2)",
                                   "mirror": False,
@@ -308,67 +334,67 @@ overview = html.Div([  # page 1
                             className="gs-header gs-table-header padded"),
                     dcc.Graph(
                         id='graph-3',
-                        figure = {
+                        figure={
                             'data': [
                                 go.Scatter(
-                                    x = ["0", "0.18", "0.18", "0"],
-                                    y = ["0.2", "0.2", "0.4", "0.2"],
-                                    fill = "tozerox",
-                                    fillcolor = "rgba(31, 119, 180, 0.2)",
-                                    hoverinfo = "none",
-                                    line = {"width": 0},
-                                    mode = "lines",
-                                    name = "B",
-                                    showlegend = False
+                                    x=["0", "0.18", "0.18", "0"],
+                                    y=["0.2", "0.2", "0.4", "0.2"],
+                                    fill="tozerox",
+                                    fillcolor="rgba(31, 119, 180, 0.2)",
+                                    hoverinfo="none",
+                                    line={"width": 0},
+                                    mode="lines",
+                                    name="B",
+                                    showlegend=False
                                 ),
                                 go.Scatter(
-                                    x = ["0.2", "0.38", "0.38", "0.2", "0.2"],
-                                    y = ["0.2", "0.2", "0.6", "0.4", "0.2"],
-                                    fill = "tozerox",
-                                    fillcolor = "rgba(31, 119, 180, 0.4)",
-                                    hoverinfo = "none",
-                                    line = {"width": 0},
-                                    mode = "lines",
-                                    name = "D",
-                                    showlegend = False
+                                    x=["0.2", "0.38", "0.38", "0.2", "0.2"],
+                                    y=["0.2", "0.2", "0.6", "0.4", "0.2"],
+                                    fill="tozerox",
+                                    fillcolor="rgba(31, 119, 180, 0.4)",
+                                    hoverinfo="none",
+                                    line={"width": 0},
+                                    mode="lines",
+                                    name="D",
+                                    showlegend=False
                                 ),
                                 go.Scatter(
-                                    x = ["0.4", "0.58", "0.58", "0.4", "0.4"],
-                                    y = ["0.2", "0.2", "0.8", "0.6", "0.2"],
-                                    fill = "tozerox",
-                                    fillcolor = "rgba(31, 119, 180, 0.6)",
-                                    hoverinfo = "none",
-                                    line = {"width": 0},
-                                    mode = "lines",
-                                    name = "F",
-                                    showlegend = False
+                                    x=["0.4", "0.58", "0.58", "0.4", "0.4"],
+                                    y=["0.2", "0.2", "0.8", "0.6", "0.2"],
+                                    fill="tozerox",
+                                    fillcolor="rgba(31, 119, 180, 0.6)",
+                                    hoverinfo="none",
+                                    line={"width": 0},
+                                    mode="lines",
+                                    name="F",
+                                    showlegend=False
                                 ),
                                 go.Scatter(
-                                    x = ["0.6", "0.78", "0.78", "0.6", "0.6"],
-                                    y = ["0.2", "0.2", "1", "0.8", "0.2"],
-                                    fill = "tozerox",
-                                    fillcolor = "rgb(31, 119, 180)",
-                                    hoverinfo = "none",
-                                    line = {"width": 0},
-                                    mode = "lines",
-                                    name = "H",
-                                    showlegend = False
+                                    x=["0.6", "0.78", "0.78", "0.6", "0.6"],
+                                    y=["0.2", "0.2", "1", "0.8", "0.2"],
+                                    fill="tozerox",
+                                    fillcolor="rgb(31, 119, 180)",
+                                    hoverinfo="none",
+                                    line={"width": 0},
+                                    mode="lines",
+                                    name="H",
+                                    showlegend=False
                                 ),
                                 go.Scatter(
-                                    x = ["0.8", "0.98", "0.98", "0.8", "0.8"],
-                                    y = ["0.2", "0.2", "1.2", "1", "0.2"],
-                                    fill = "tozerox",
-                                    fillcolor = "rgba(31, 119, 180, 0.8)",
-                                    hoverinfo = "none",
-                                    line = {"width": 0},
-                                    mode = "lines",
-                                    name = "J",
-                                    showlegend = False
+                                    x=["0.8", "0.98", "0.98", "0.8", "0.8"],
+                                    y=["0.2", "0.2", "1.2", "1", "0.2"],
+                                    fill="tozerox",
+                                    fillcolor="rgba(31, 119, 180, 0.8)",
+                                    hoverinfo="none",
+                                    line={"width": 0},
+                                    mode="lines",
+                                    name="J",
+                                    showlegend=False
                                 ),
                             ],
                             'layout': go.Layout(
-                                title = "",
-                                annotations = [
+                                title="",
+                                annotations=[
                                     {
                                       "x": 0.69,
                                       "y": 0.6,
@@ -392,7 +418,8 @@ overview = html.Div([  # page 1
                                         "size": 10
                                       },
                                       "showarrow": False,
-                                      "text": "<b>Less risk<br>Less reward</b>",
+                                      "text":
+                                      "<b>Less risk<br>Less reward</b>",
                                       "xref": "x",
                                       "yref": "y"
                                     },
@@ -406,22 +433,22 @@ overview = html.Div([  # page 1
                                         "size": 10
                                       },
                                       "showarrow": False,
-                                      "text": "<b>More risk<br>More reward</b>",
+                                      "text":
+                                      "<b>More risk<br>More reward</b>",
                                       "xref": "x",
                                       "yref": "y"
-                                    }
-                                  ],
-                                  autosize = False,
-                                  height = 200,
-                                  width = 340,
-                                  hovermode = "closest",
-                                  margin = {
+                                    }],
+                                autosize=False,
+                                height=200,
+                                width=340,
+                                hovermode="closest",
+                                margin={
                                     "r": 10,
                                     "t": 20,
                                     "b": 80,
                                     "l": 10
                                   },
-                                  shapes = [
+                                shapes=[
                                     {
                                       "fillcolor": "rgb(255, 255, 255)",
                                       "line": {
@@ -438,8 +465,8 @@ overview = html.Div([  # page 1
                                       "yref": "y"
                                     }
                                   ],
-                                  showlegend = True,
-                                  xaxis = {
+                                showlegend=True,
+                                xaxis={
                                     "autorange": False,
                                     "fixedrange": True,
                                     "range": [-0.05, 1.05],
@@ -449,7 +476,7 @@ overview = html.Div([  # page 1
                                     "type": "linear",
                                     "zeroline": False
                                   },
-                                  yaxis = {
+                                yaxis={
                                     "autorange": False,
                                     "fixedrange": True,
                                     "range": [-0.3, 1.6],
@@ -517,40 +544,38 @@ pricePerformance = html.Div([  # page 2
                         figure={
                             'data': [
                                 go.Scatter(
-                                    x = df_graph['Date'],
-                                    y = df_graph['Vanguard 500 Index Fund'],
-                                    line = {"color": "rgb(53, 83, 255)"},
-                                    mode = "lines",
-                                    name = "Vanguard 500 Index Fund"
+                                    x=df_graph['Date'],
+                                    y=df_graph['Vanguard 500 Index Fund'],
+                                    line={"color": "rgb(53, 83, 255)"},
+                                    mode="lines",
+                                    name="Vanguard 500 Index Fund"
                                 ),
                                 go.Scatter(
-                                    x = df_graph['Date'],
-                                    y = df_graph['MSCI EAFE Index Fund (ETF)'],
-                                    line = {"color": "rgb(255, 225, 53)"},
-                                    mode = "lines",
-                                    name = "MSCI EAFE Index Fund (ETF)"
+                                    x=df_graph['Date'],
+                                    y=df_graph['MSCI EAFE Index Fund (ETF)'],
+                                    line={"color": "rgb(255, 225, 53)"},
+                                    mode="lines",
+                                    name="MSCI EAFE Index Fund (ETF)"
                                 )
                             ],
                             'layout': go.Layout(
-                                autosize = False,
-                                width = 700,
-                                height = 200,
-                                font = {
+                                autosize=False,
+                                width=700,
+                                height=200,
+                                font={
                                     "family": "Raleway",
                                     "size": 10
-                                  },
-                                 margin = {
+                                  }, margin={
                                     "r": 40,
                                     "t": 40,
                                     "b": 30,
                                     "l": 40
-                                  },
-                                  showlegend = True,
-                                  titlefont = {
+                                  }, showlegend=True,
+                                    titlefont={
                                     "family": "Raleway",
                                     "size": 10
                                   },
-                                  xaxis = {
+                                  xaxis={
                                     "autorange": True,
                                     "range": ["2007-12-31", "2018-03-06"],
                                     "rangeselector": {"buttons": [
@@ -586,7 +611,7 @@ pricePerformance = html.Div([  # page 2
                                     "type": "date",
                                     "zeroline": False
                                   },
-                                  yaxis = {
+                                  yaxis={
                                     "autorange": True,
                                     "range": [18.6880162434, 278.431996757],
                                     "showline": True,
@@ -608,8 +633,11 @@ pricePerformance = html.Div([  # page 2
             html.Div([
 
                 html.Div([
-                    html.H6(["Average annual returns--updated monthly as of 02/28/2018"], className="gs-header gs-table-header tiny-header"),
-                    html.Table(make_dash_table(df_avg_returns), className="tiny-header")
+                    html.H6(["Average annual returns-- \
+                             updated monthly as of 02/28/2018"],
+                            className="gs-header gs-table-header tiny-header"),
+                    html.Table(make_dash_table(df_avg_returns),
+                               className="tiny-header")
                 ], className=" twelve columns"),
 
             ], className="row "),
@@ -619,8 +647,11 @@ pricePerformance = html.Div([  # page 2
             html.Div([
 
                 html.Div([
-                    html.H6(["After-tax returns--updated quarterly as of 12/31/2017"], className="gs-header gs-table-header tiny-header"),
-                    html.Table(make_dash_table(df_after_tax), className="tiny-header")
+                    html.H6(["After-tax returns--\
+                             updated quarterly as of 12/31/2017"],
+                            className="gs-header gs-table-header tiny-header"),
+                    html.Table(make_dash_table(df_after_tax),
+                               className="tiny-header")
                 ], className=" twelve columns"),
 
             ], className="row "),
@@ -676,19 +707,19 @@ portfolioManagement = html.Div([ # page 3
                         figure={
                             'data': [
                                 go.Scatter(
-                                    x = ["1"],
-                                    y = ["1"],
-                                    hoverinfo = "none",
-                                    marker = {
+                                    x=["1"],
+                                    y=["1"],
+                                    hoverinfo="none",
+                                    marker={
                                         "color": ["transparent"]
                                     },
-                                    mode = "markers",
-                                    name = "B",
+                                    mode="markers",
+                                    name="B",
                                 )
                             ],
                             'layout': go.Layout(
-                                title = "",
-                                annotations = [
+                                title="",
+                                annotations=[
                                 {
                                   "x": 0.990130093458,
                                   "y": 1.00181709504,
@@ -716,17 +747,17 @@ portfolioManagement = html.Div([ # page 3
                                   "yref": "y"
                                 }
                               ],
-                              autosize = False,
-                              width = 200,
-                              height = 150,
-                              hovermode = "closest",
-                              margin = {
+                              autosize=False,
+                              width=200,
+                              height=150,
+                              hovermode="closest",
+                              margin={
                                 "r": 30,
                                 "t": 20,
                                 "b": 20,
                                 "l": 30
                               },
-                              shapes = [
+                              shapes=[
                                 {
                                   "fillcolor": "rgb(127, 127, 127)",
                                   "line": {
@@ -864,7 +895,7 @@ portfolioManagement = html.Div([ # page 3
                                   "yref": "paper"
                                 }
                               ],
-                              xaxis = {
+                              xaxis={
                                 "autorange": True,
                                 "range": [0.989694747864, 1.00064057995],
                                 "showgrid": False,
@@ -874,7 +905,7 @@ portfolioManagement = html.Div([ # page 3
                                 "type": "linear",
                                 "zeroline": False
                               },
-                              yaxis = {
+                              yaxis={
                                 "autorange": True,
                                 "range": [-0.0358637178721, 1.06395696354],
                                 "showgrid": False,
